@@ -5,10 +5,6 @@ int main()
 {
 
     sf::RenderWindow window(sf::VideoMode(800, 800), "A* Pathfinding");
-    // sf::RectangleShape shape({100,100});
-    // shape.setFillColor({127,85,57,255});
-    // shape.setOutlineColor(sf::Color::Black);
-    // shape.setOutlineThickness(4.F);
     
     Simulation sim{&window};
 
