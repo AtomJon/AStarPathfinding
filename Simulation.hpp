@@ -5,12 +5,16 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Algorithm.hpp"
+
 class Simulation
 {
 private:
     const sf::Color BROWN{127, 85, 57, 255};
     const sf::Color GRAY{128, 128, 128, 255};
     std::array<bool, 64> grid;
+    
+    Algorithm algo{{1,4}};;
     
     sf::RenderWindow* window;
     
@@ -67,6 +71,8 @@ void Simulation::Render()
     {
         RenderIndex(i);
     }
+    
+    window->draw(algo);
     
     window->display();
 }
