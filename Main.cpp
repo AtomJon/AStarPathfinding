@@ -7,6 +7,8 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 800), "A* Pathfinding");
     
     Simulation sim{&window};
+    
+    sim.CalculatePath();
 
     while (window.isOpen())
     {

@@ -14,7 +14,7 @@ private:
     const sf::Color GRAY{128, 128, 128, 255};
     std::array<bool, 64> grid;
     
-    Algorithm algo{{1,4}};;
+    Algorithm algorithm{{1,4}};;
     
     sf::RenderWindow* window;
     
@@ -28,6 +28,8 @@ public:
     void Render();
     
     void RegenerateGrid();
+    
+    void CalculatePath();
 };
 
 Simulation::Simulation(sf::RenderWindow* win)
@@ -64,6 +66,12 @@ void Simulation::RegenerateGrid()
     // std::cout << "Nr. 64 is: " << (grid[64] ? "wall" : "not wall") << std::endl;
 }
 
+void Simulation::CalculatePath()
+{
+    auto moves = algorithm.Solve(grid);
+    algorithm.ApplyMovements(moves);
+}
+
 void Simulation::Render()
 {
     window->clear(sf::Color::Black);
@@ -73,7 +81,7 @@ void Simulation::Render()
         RenderIndex(i);
     }
     
-    window->draw(algo);
+    window->draw(algorithm);
     
     window->display();
 }

@@ -5,23 +5,27 @@
 
 const sf::Vector2i UP = {0,1}, DOWN = {0,-1}, LEFT = {-1,0}, RIGHT = {1,0};
 
+typedef std::list<sf::Vector2i> MovesList;
+
 class Algorithm : public sf::Drawable
 {
 private:
-    sf::Vector2u position;
+    sf::Vector2i position;
     
     std::list<sf::Vector2i> moves;
     
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 public:
-    Algorithm(sf::Vector2u);
+    Algorithm(sf::Vector2i);
     ~Algorithm();
     
-    void Solve(std::array<bool, 64>);
+    MovesList Solve(std::array<bool, 64>);
+    void ApplyMovements(MovesList);
+    
     void Render(sf::RenderWindow);
 };
 
-Algorithm::Algorithm(sf::Vector2u startingPosition)
+Algorithm::Algorithm(sf::Vector2i startingPosition)
 {
     position = startingPosition;
 }
@@ -30,9 +34,20 @@ Algorithm::~Algorithm()
 {
 }
 
-void Algorithm::Solve(std::array<bool, 64> grid)
+MovesList Algorithm::Solve(std::array<bool, 64> grid)
 {
-    moves = {RIGHT, RIGHT, RIGHT, RIGHT};
+    moves = {RIGHT, RIGHT, RIGHT, RIGHT, RIGHT};
+    
+    return moves;
+}
+
+void Algorithm::ApplyMovements(MovesList moves)
+{
+    for (auto &&i : moves)
+    {
+        this->position += i;
+    }
+    
 }
 
 void Algorithm::draw(sf::RenderTarget& target, sf::RenderStates states) const
