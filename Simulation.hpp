@@ -6,6 +6,11 @@
 #include <SFML/Graphics.hpp>
 
 #include "Algorithm.hpp"
+#include "AlgorithmVisualizer.hpp"
+
+#ifndef STARTING_POSITION
+#define STARTING_POSITION {1,4}
+#endif
 
 class Simulation
 {
@@ -14,7 +19,8 @@ private:
     const sf::Color GRAY{128, 128, 128, 255};
     std::array<bool, 64> grid;
     
-    Algorithm algorithm{{1,4}};;
+    Algorithm algorithm;
+    AlgorithmVisualizer algorithmVisualizer{STARTING_POSITION};
     
     sf::RenderWindow* window;
     
@@ -68,8 +74,8 @@ void Simulation::RegenerateGrid()
 
 void Simulation::CalculatePath()
 {
-    auto moves = algorithm.Solve(grid);
-    algorithm.ApplyMovements(moves);
+    auto moves = algorithm.Solve(grid, STARTING_POSITION);
+    algorithmVisualizer.ApplyMovements(moves);
 }
 
 void Simulation::Render()
@@ -81,7 +87,7 @@ void Simulation::Render()
         RenderIndex(i);
     }
     
-    window->draw(algorithm);
+    window->draw(algorithmVisualizer);
     
     window->display();
 }

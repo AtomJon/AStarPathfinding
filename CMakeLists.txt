@@ -6,7 +6,10 @@ add_executable(
     Main
     Main.cpp
     Simulation.hpp
+    Algorithm.cpp
+    AlgorithmVisualizer.cpp
     Algorithm.hpp
+    AlgorithmVisualizer.hpp
 )
 
 target_link_libraries(Main sfml-graphics sfml-window sfml-system)
