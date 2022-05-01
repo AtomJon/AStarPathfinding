@@ -50,10 +50,10 @@ void Simulation::RegenerateGrid()
     for (size_t i = 0; i < 64; i++)
     {
         if (
-            i > 17 && i < 22 ||
-            i > 25 && i < 30 ||
-            i > 33 && i < 38 ||
-            i > 41 && i < 46
+            (i > 17 && i < 22) ||
+            (i > 33 && i < 38) ||
+            (i > 25 && i < 30) ||
+            (i > 41 && i < 46)
         )
         {
             bool isWall = dist2(rng);
@@ -61,6 +61,7 @@ void Simulation::RegenerateGrid()
         }
     }
     
+    // std::cout << "Nr. 64 is: " << (grid[64] ? "wall" : "not wall") << std::endl;
 }
 
 void Simulation::Render()
