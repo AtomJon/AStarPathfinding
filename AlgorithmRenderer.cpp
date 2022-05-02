@@ -1,4 +1,4 @@
-#include "AlgorithmVisualizer.hpp"
+#include "AlgorithmRenderer.hpp"
 
 #include <array>
 #include <list>
@@ -7,16 +7,16 @@
 
 #include "Utils.hpp"
 
-AlgorithmVisualizer::AlgorithmVisualizer(sf::Vector2i startingPosition)
+AlgorithmRenderer::AlgorithmRenderer(sf::Vector2i startingPosition)
 {
     position = startingPosition;
 }
 
-AlgorithmVisualizer::~AlgorithmVisualizer()
+AlgorithmRenderer::~AlgorithmRenderer()
 {
 }
 
-void AlgorithmVisualizer::ApplyMovements(MovesList moves)
+void AlgorithmRenderer::ApplyMovements(MovesList moves)
 {
     for (auto &&i : moves)
     {
@@ -25,7 +25,7 @@ void AlgorithmVisualizer::ApplyMovements(MovesList moves)
     
 }
 
-void AlgorithmVisualizer::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void AlgorithmRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     sf::RectangleShape shape{{50.f,50.f}};
     sf::Vector2f pos{position.x * 100.f + 25, position.y * 100.f + 25};

@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Algorithm.hpp"
-#include "AlgorithmVisualizer.hpp"
+#include "AlgorithmRenderer.hpp"
 
 #ifndef STARTING_POSITION
 #define STARTING_POSITION {1,4}
@@ -20,7 +20,7 @@ private:
     std::array<bool, 64> grid;
     
     Algorithm algorithm;
-    AlgorithmVisualizer algorithmVisualizer{STARTING_POSITION};
+    AlgorithmRenderer algoRenderer{STARTING_POSITION};
     
     sf::RenderWindow* window;
     
@@ -75,7 +75,7 @@ void Simulation::RegenerateGrid()
 void Simulation::CalculatePath()
 {
     auto moves = algorithm.Solve(grid, STARTING_POSITION);
-    algorithmVisualizer.ApplyMovements(moves);
+    algoRenderer.ApplyMovements(moves);
 }
 
 void Simulation::Render()
@@ -87,7 +87,7 @@ void Simulation::Render()
         RenderIndex(i);
     }
     
-    window->draw(algorithmVisualizer);
+    window->draw(algoRenderer);
     
     window->display();
 }

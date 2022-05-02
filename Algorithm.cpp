@@ -7,7 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "AlgorithmVisualizer.hpp"
+#include "AlgorithmRenderer.hpp"
 
 #include "Utils.hpp"
 

@@ -1,5 +1,5 @@
-#ifndef ALGORITHMVISUALIZER
-#define ALGORITHMVISUALIZER
+#ifndef ALGORITHMRENDERER_H
+#define ALGORITHMRENDERER_H
 
 #include <array>
 #include <list>
@@ -8,7 +8,7 @@
 
 #include "Utils.hpp"
 
-class AlgorithmVisualizer : public sf::Drawable
+class AlgorithmRenderer : public sf::Drawable
 {
 private:
     sf::Vector2i position;
@@ -17,8 +17,8 @@ private:
     
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 public:
-    AlgorithmVisualizer(sf::Vector2i startingPosition);
-    ~AlgorithmVisualizer();
+    AlgorithmRenderer(sf::Vector2i startingPosition);
+    ~AlgorithmRenderer();
     
     void ApplyMovements(MovesList moves);
 };
