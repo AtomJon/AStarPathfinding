@@ -42,6 +42,8 @@ Simulation::Simulation(sf::RenderWindow* win)
 {
     window = win;
     
+    grid.fill(0); // Initialize grid. Otherwise grid can contain random values.
+    
     RegenerateGrid();
 }
 
@@ -68,8 +70,6 @@ void Simulation::RegenerateGrid()
             grid[i] = isWall;
         }
     }
-    
-    // std::cout << "Nr. 64 is: " << (grid[64] ? "wall" : "not wall") << std::endl;
 }
 
 void Simulation::CalculatePath()
@@ -108,8 +108,8 @@ sf::VertexBuffer Simulation::GetVerticesFromIndex(int index)
 {
     auto coords = GetCoordsFromIndex(index);
     
-    float offsetX = coords.x * 100;
-    float offsetY = coords.y * 100;
+    float offsetX = coords.x * 100.f;
+    float offsetY = coords.y * 100.f;
     
     float size = 100;
     
