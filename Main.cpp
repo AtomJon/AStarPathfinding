@@ -1,9 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include "Simulation.hpp"
 
+#include "Utils.hpp"
+
 int main()
 {
-
     sf::RenderWindow window(sf::VideoMode(800, 800), "A* Pathfinding");
     
     Simulation sim{&window};
@@ -19,7 +20,7 @@ int main()
                 window.close();
                 
             if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::R)
-                sim.RegenerateGrid();
+                sim.Regenerate();
         }
 
         sim.Render();
