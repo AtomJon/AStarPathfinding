@@ -10,6 +10,7 @@ add_executable(
     AlgorithmRenderer.cpp
     Algorithm.hpp
     AlgorithmRenderer.hpp
+    Utils.cpp
 )
 
 target_link_libraries(Main sfml-graphics sfml-window sfml-system)
