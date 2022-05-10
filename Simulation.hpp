@@ -58,7 +58,8 @@ Simulation::~Simulation()
 void Simulation::Regenerate()
 {
     RegenerateGrid();
-    CalculatePath();
+    algoRenderer.ApplyMovements({});
+    Render(); // Draw grid
 }
 
 void Simulation::RegenerateGrid()
@@ -84,7 +85,6 @@ void Simulation::RegenerateGrid()
 
 void Simulation::CalculatePath()
 {
-    std::cout << "Calculating new path using algorithm" << std::endl;
     auto moves = algorithm.Solve(&grid, STARTING_POSITION, TARGET_POSITION);
     algoRenderer.ApplyMovements(moves);
 }

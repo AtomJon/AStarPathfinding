@@ -40,6 +40,11 @@ Vector2f normalize(const Vector2f& source)
         return source;
 }
 
+Vector2i Algorithm::GetLastMove()
+{
+    return moves.back();
+}
+
 void Algorithm::AddMove(sf::Vector2i move)
 {
     if (lengthOfVector({move.x, move.y}) > 1.)
@@ -52,24 +57,37 @@ void Algorithm::AddMove(sf::Vector2i move)
     moves.emplace_back(move);
 }
 
-bool Algorithm::IsPositionWall(Vector2i pos)
+bool Algorithm::PositionIsWall(Vector2i pos)
 {
     int index = Get8x8GridIndexFromCoords({pos.x, pos.y});
     return (*grid)[index];
 }
 
-float Algorithm::GetDistanceOfMoveToTarget(sf::Vector2i move)
+float Algorithm::GetDistanceToTarget(sf::Vector2i tempPosition)
 {
-    auto tempPosition = position + move;
     float distanceToTarget = DistanceBetweenVectors<int>(tempPosition, targetPosition);
     return distanceToTarget;
 }
 
 float Algorithm::GetScoreOfMove(sf::Vector2i move)
-{    
-    // Discard moves that aren't possible
+{
+    // Avoid current move, if move converses last move
+    auto lastMove = GetLastMove();
+    auto intermediateAbs = abs(DistanceBetweenVectors(lastMove, move));
+    if (intermediateAbs == 2)
+    {
+        return INFINITY;
+    }    
     
-    return GetDistanceOfMoveToTarget(move);
+    auto tempPosition = position + move;
+ 
+    if (PositionIsWall(tempPosition))
+    {
+        return INFINITY; // Move goes into a wall, so discard it.
+    }
+ 
+    float distance = GetDistanceToTarget(tempPosition);
+    return distance;
 }
 
 Vector2i Algorithm::ChooseBestMove()
@@ -78,9 +96,9 @@ Vector2i Algorithm::ChooseBestMove()
     float upScore = GetScoreOfMove(UP);
     float downScore = GetScoreOfMove(DOWN);
     
-    if      (rightScore <= upScore && rightScore <= downScore)    return RIGHT;
-    else if (upScore <= rightScore && upScore <= downScore)       return UP;
-    else if (downScore <= rightScore && downScore <= upScore)     return DOWN;
+    if      (rightScore <= upScore && rightScore < downScore)    return RIGHT;
+    else if (upScore <= rightScore && upScore < downScore)       return UP;
+    else if (downScore <= rightScore && downScore < upScore)     return DOWN;
     else                                                        return LEFT;
 }
 
@@ -99,10 +117,9 @@ MovesList Algorithm::Solve(Boolean8x8Grid *_grid, sf::Vector2i _position, sf::Ve
         }
         
         auto move = ChooseBestMove();
+        
         AddMove(move);
     }
-    
-    std::cout << moves.size() << std::endl;
     
     return moves;
 }

@@ -16,11 +16,12 @@ private:
     sf::Vector2i position, targetPosition;
     Boolean8x8Grid *grid;
     
+    sf::Vector2i GetLastMove();
     void AddMove(sf::Vector2i move);
-    bool IsPositionWall(sf::Vector2i pos);
+    bool PositionIsWall(sf::Vector2i pos);
     bool AttemptMove(sf::Vector2i pos);
     
-    float GetDistanceOfMoveToTarget(sf::Vector2i);
+    float GetDistanceToTarget(sf::Vector2i);
     float GetScoreOfMove(sf::Vector2i);
     
     sf::Vector2i ChooseBestMove();
