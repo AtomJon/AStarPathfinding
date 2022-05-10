@@ -12,12 +12,16 @@
 #define STARTING_POSITION {1,4}
 #endif
 
+#ifndef TARGET_POSITION
+#define TARGET_POSITION {6,1}
+#endif
+
 class Simulation
 {
 private:
     const sf::Color BROWN{127, 85, 57, 255};
     const sf::Color GRAY{128, 128, 128, 255};
-    std::array<bool, 64> grid;
+    Boolean8x8Grid grid;
     
     Algorithm algorithm;
     AlgorithmRenderer algoRenderer{STARTING_POSITION};
@@ -25,7 +29,6 @@ private:
     sf::RenderWindow* window;
     
     void RenderIndex(int);
-    sf::Vector2u GetCoordsFromIndex(int);
     sf::VertexBuffer GetVerticesFromIndex(int);
 public:
     Simulation(sf::RenderWindow*);
@@ -33,8 +36,9 @@ public:
     
     void Render();
     
-    void RegenerateGrid();
+    void Regenerate();
     
+    void RegenerateGrid();
     void CalculatePath();
 };
 
@@ -49,6 +53,12 @@ Simulation::Simulation(sf::RenderWindow* win)
 
 Simulation::~Simulation()
 {
+}
+
+void Simulation::Regenerate()
+{
+    RegenerateGrid();
+    CalculatePath();
 }
 
 void Simulation::RegenerateGrid()
@@ -74,7 +84,8 @@ void Simulation::RegenerateGrid()
 
 void Simulation::CalculatePath()
 {
-    auto moves = algorithm.Solve(grid, STARTING_POSITION);
+    std::cout << "Calculating new path using algorithm" << std::endl;
+    auto moves = algorithm.Solve(&grid, STARTING_POSITION, TARGET_POSITION);
     algoRenderer.ApplyMovements(moves);
 }
 
@@ -106,7 +117,7 @@ void Simulation::RenderIndex(int index)
 
 sf::VertexBuffer Simulation::GetVerticesFromIndex(int index) 
 {
-    auto coords = GetCoordsFromIndex(index);
+    auto coords = GetCoordsFrom8x8GridIndex(index);
     
     float offsetX = coords.x * 100.f;
     float offsetY = coords.y * 100.f;
@@ -145,14 +156,4 @@ sf::VertexBuffer Simulation::GetVerticesFromIndex(int index)
     buffer.update(updatedVertices);
     
     return buffer;
-}
-
-sf::Vector2u Simulation::GetCoordsFromIndex(int index)
-{
-    auto div = std::div(index, 8);
-    
-    uint x = div.rem;
-    uint y = div.quot;
-    
-    return {x,y};
 }

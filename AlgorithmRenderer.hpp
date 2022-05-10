@@ -11,16 +11,16 @@
 class AlgorithmRenderer : public sf::Drawable
 {
 private:
-    sf::Vector2i position;
+    sf::Vector2i entryOnGrid;
     
     MovesList moves;
     
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 public:
-    AlgorithmRenderer(sf::Vector2i startingPosition);
+    AlgorithmRenderer(sf::Vector2i);
     ~AlgorithmRenderer();
     
-    void ApplyMovements(MovesList moves);
+    void ApplyMovements(MovesList);
 };
 
 #endif
