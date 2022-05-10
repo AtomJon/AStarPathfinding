@@ -59,8 +59,8 @@ void Simulation::Regenerate()
 {
     RegenerateGrid();
     algoRenderer.ApplyMovements({});
-    CalculatePath();
     Render(); // Draw grid
+    CalculatePath();
 }
 
 void Simulation::RegenerateGrid()
