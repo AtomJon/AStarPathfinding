@@ -1,8 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Simulation.hpp"
 
-#include "Utils.hpp"
-
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 800), "A* Pathfinding");
