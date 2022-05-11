@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(Main)
+project(PathfindingExe)
 
 add_executable(
-    Main
+    PathfindingExe
     Main.cpp
     Simulation.hpp
     Algorithm.cpp
@@ -13,4 +13,4 @@ add_executable(
     Utils.cpp
 )
 
-target_link_libraries(Main sfml-graphics sfml-window sfml-system)
+target_link_libraries(PathfindingExe sfml-graphics sfml-window sfml-system)
