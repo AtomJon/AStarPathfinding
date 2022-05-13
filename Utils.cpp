@@ -6,12 +6,12 @@
 
 using namespace sf;
 
-Vector2u GetCoordsFrom8x8GridIndex(int index)
+Vector2i GetCoordsFrom8x8GridIndex(int index)
 {
     auto div = std::div(index, 8);
     
-    uint x = div.rem;
-    uint y = div.quot;
+    int x = div.rem;
+    int y = div.quot;
     
     return {x,y};
 }
