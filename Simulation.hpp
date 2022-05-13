@@ -13,7 +13,7 @@
 #endif
 
 #ifndef TARGET_POSITION
-#define TARGET_POSITION {6,1}
+#define TARGET_POSITION {6,4}
 #endif
 
 class Simulation
