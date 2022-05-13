@@ -47,7 +47,7 @@ Vector2i Algorithm::GetLastMove()
 
 void Algorithm::AddMove(sf::Vector2i move)
 {
-    if (lengthOfVector({move.x, move.y}) > 1.)
+    if (lengthOfVector({(float)move.x, (float)move.y}) > 1.)
     {
         std::cout << "Illegal move attempted. Crashing" << std::endl;
         std::exit(-1);
