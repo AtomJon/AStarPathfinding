@@ -16,7 +16,7 @@ Vector2u GetCoordsFrom8x8GridIndex(int index)
     return {x,y};
 }
 
-int Get8x8GridIndexFromCoords(sf::Vector2u coords)
+int Get8x8GridIndexFromCoords(sf::Vector2i coords)
 {
     return coords.x + coords.y * 8;
 }
