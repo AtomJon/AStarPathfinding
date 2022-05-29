@@ -3,24 +3,25 @@
 
 #include <array>
 #include <list>
+#include <iostream>
 
 #include <SFML/Graphics.hpp>
 
 #include "Utils.hpp"
+#include "BaseAlgorithm.hpp"
 
-class AlgorithmRenderer : public sf::Drawable
+namespace NeutronicPathfinding
 {
-private:
-    sf::Vector2i entryOnGrid;
-    
-    MovesList moves;
-    
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-public:
-    AlgorithmRenderer(sf::Vector2i);
-    ~AlgorithmRenderer();
-    
-    void ApplyMovements(MovesList);
-};
+    class AlgorithmRenderer : public sf::Drawable
+    {
+    private:
+        BaseAlgorithm* algorithm;
+    public:
+        AlgorithmRenderer(BaseAlgorithm* algorithm);
+        ~AlgorithmRenderer();
+        
+        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    };
+}
 
 #endif
