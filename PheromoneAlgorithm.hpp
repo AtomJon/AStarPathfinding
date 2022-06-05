@@ -20,7 +20,6 @@ namespace NeutronicPathfinding
     private:
         Boolean8x8Grid *grid;
 
-        GridCoords position;
         GridPositionsList positionsAlreadyBeenTo;
 
         GridMove GetLastMove();
