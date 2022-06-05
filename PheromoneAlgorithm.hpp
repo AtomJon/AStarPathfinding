@@ -19,20 +19,21 @@ namespace NeutronicPathfinding
     {
     private:
         Boolean8x8Grid *grid;
-    
-        GridCoords GetLastMove();
-        void PerformMove(GridCoords move);
+
+        GridMove GetLastMove();
+        void PerformMove(GridMove move);
         bool PositionIsWall(GridCoords pos);
         bool AttemptMove(GridCoords pos);
-        
-        float GetDistanceToTarget(GridCoords);
-        float GetScoreOfMove(GridCoords);
-        
+
+        float GetDistanceToTarget(GridCoords pos);
+        float GetScoreOfMove(GridMove move);
+
         GridCoords ChooseBestMove();
+
     public:
         PheromoneAlgorithm() {}
         ~PheromoneAlgorithm() {}
-        
+
         virtual void Initiate(Boolean8x8Grid *grid, GridCoords position, GridCoords targetPosition);
         virtual void Tick();
     };
