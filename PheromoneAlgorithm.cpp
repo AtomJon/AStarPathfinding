@@ -13,6 +13,8 @@
 
 using namespace sf;
 
+const int IMPOSSIBLE_MOVE = INFINITY;
+
 const GridCoords UP = {0, 1}, DOWN = {0, -1}, LEFT = {-1, 0}, RIGHT = {1, 0};
 
 float lengthOfVector(const Vector2f &source)
@@ -69,22 +71,40 @@ namespace NeutronicPathfinding
         return distanceToTarget;
     }
 
+    bool PheromoneAlgorithm::HaveAlreadyBeenToPosition(GridCoords pos)
+    {
+        for (auto &&previousPos : positionsAlreadyBeenTo)
+        {
+            if (previousPos == pos)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     float PheromoneAlgorithm::GetScoreOfMove(GridMove move)
     {
         // Avoid current move, if move converses last move
-        auto lastMove = GetLastMove();
-        auto intermediateAbs = abs(DistanceBetweenVectors(lastMove, move));
-        if (intermediateAbs == 2)
-        {
-            return INFINITY;
-        }
+        // auto lastMove = GetLastMove();
+        // auto intermediateAbs = abs(DistanceBetweenVectors(lastMove, move));
+        // if (intermediateAbs == 2)
+        // {
+        //     return INFINITY;
+        // }
 
         auto tempPosition = position + move;
 
         if (PositionIsWall(tempPosition))
         {
-            return INFINITY; // Move goes into a wall, so discard it.
+            return IMPOSSIBLE_MOVE; // Move goes into a wall, so discard it.
         }
+
+        // if (HaveAlreadyBeenToPosition(tempPosition))
+        // {
+        //     return INT16_MAX;
+        // }
 
         float distance = GetDistanceToTarget(tempPosition);
         return distance;
@@ -96,11 +116,11 @@ namespace NeutronicPathfinding
         float upScore = GetScoreOfMove(UP);
         float downScore = GetScoreOfMove(DOWN);
 
-        if (rightScore <= upScore && rightScore <= downScore)
+        if (rightScore != IMPOSSIBLE_MOVE && rightScore <= upScore && rightScore <= downScore)
             return RIGHT;
-        else if (upScore <= rightScore && upScore <= downScore)
+        else if (upScore != IMPOSSIBLE_MOVE && upScore <= rightScore && upScore <= downScore)
             return UP;
-        else if (downScore <= rightScore && downScore <= upScore)
+        else if (downScore != IMPOSSIBLE_MOVE && downScore <= rightScore && downScore <= upScore)
             return DOWN;
         else
             return LEFT;

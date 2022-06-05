@@ -23,6 +23,7 @@ namespace NeutronicPathfinding
         GridPositionsList positionsAlreadyBeenTo;
 
         GridMove GetLastMove();
+        bool HaveAlreadyBeenToPosition(GridCoords pos);
         void PerformMove(GridMove move);
         bool PositionIsWall(GridCoords pos);
         bool AttemptMove(GridCoords pos);
