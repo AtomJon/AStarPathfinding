@@ -7,7 +7,7 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode({800, 800}), "A* Pathfinding");
-    
+
     NeutronicPathfinding::Simulation sim{&window};
 
     while (window.isOpen())
@@ -17,7 +17,7 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-                
+
             if (event.type == sf::Event::KeyReleased)
             {
                 const auto keyCode = event.key.code;

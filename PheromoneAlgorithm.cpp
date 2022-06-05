@@ -13,14 +13,14 @@
 
 using namespace sf;
 
-const GridCoords UP = {0,1}, DOWN = {0,-1}, LEFT = {-1,0}, RIGHT = {1,0};
+const GridCoords UP = {0, 1}, DOWN = {0, -1}, LEFT = {-1, 0}, RIGHT = {1, 0};
 
-float lengthOfVector(const Vector2f& source)
+float lengthOfVector(const Vector2f &source)
 {
     return std::sqrt((source.x * source.x) + (source.y * source.y));
 }
 
-Vector2f normalize(const Vector2f& source)
+Vector2f normalize(const Vector2f &source)
 {
     float length = lengthOfVector(source);
     if (length != 0)
@@ -37,20 +37,22 @@ namespace NeutronicPathfinding
         position = _position;
         targetPosition = _targetPosition;
     }
-    
-    GridCoords PheromoneAlgorithm::GetLastMove()
+
+    GridMove PheromoneAlgorithm::GetLastMove()
     {
         return moves.back();
     }
 
-    void PheromoneAlgorithm::PerformMove(GridCoords move)
+    void PheromoneAlgorithm::PerformMove(GridMove move)
     {
         if (lengthOfVector({(float)move.x, (float)move.y}) > 1.)
         {
             std::cout << "Illegal move attempted. Crashing" << std::endl;
             std::exit(-1);
         }
-        
+
+        positionsAlreadyBeenTo.push_front(position);
+
         position += move;
         moves.emplace_back(move);
     }
@@ -67,7 +69,7 @@ namespace NeutronicPathfinding
         return distanceToTarget;
     }
 
-    float PheromoneAlgorithm::GetScoreOfMove(GridCoords move)
+    float PheromoneAlgorithm::GetScoreOfMove(GridMove move)
     {
         // Avoid current move, if move converses last move
         auto lastMove = GetLastMove();
@@ -75,15 +77,15 @@ namespace NeutronicPathfinding
         if (intermediateAbs == 2)
         {
             return INFINITY;
-        }    
-        
+        }
+
         auto tempPosition = position + move;
-    
+
         if (PositionIsWall(tempPosition))
         {
             return INFINITY; // Move goes into a wall, so discard it.
         }
-    
+
         float distance = GetDistanceToTarget(tempPosition);
         return distance;
     }
@@ -93,13 +95,17 @@ namespace NeutronicPathfinding
         float rightScore = GetScoreOfMove(RIGHT);
         float upScore = GetScoreOfMove(UP);
         float downScore = GetScoreOfMove(DOWN);
-        
-        if      (rightScore <= upScore && rightScore <= downScore)    return RIGHT;
-        else if (upScore <= rightScore && upScore <= downScore)       return UP;
-        else if (downScore <= rightScore && downScore <= upScore)     return DOWN;
-        else                                                        return LEFT;
+
+        if (rightScore <= upScore && rightScore <= downScore)
+            return RIGHT;
+        else if (upScore <= rightScore && upScore <= downScore)
+            return UP;
+        else if (downScore <= rightScore && downScore <= upScore)
+            return DOWN;
+        else
+            return LEFT;
     }
-    
+
     void PheromoneAlgorithm::Tick()
     {
         if (position == targetPosition)
@@ -107,9 +113,9 @@ namespace NeutronicPathfinding
             // Reached target position, no need for more moves.
             return;
         }
-        
+
         auto move = ChooseBestMove();
-        
+
         PerformMove(move);
     }
 }
