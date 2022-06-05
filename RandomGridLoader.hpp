@@ -9,7 +9,7 @@
 
 namespace NeutronicPathfinding
 {
-    class RandomGridLoader : BaseGridLoader
+    class RandomGridLoader : public BaseGridLoader
     {
     public:
         RandomGridLoader();

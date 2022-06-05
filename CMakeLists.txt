@@ -26,6 +26,8 @@ add_executable(
     BaseGridLoader.hpp
     RandomGridLoader.hpp
     RandomGridLoader.cpp
+    FileGridLoader.hpp
+    FileGridLoader.cpp
     Simulation.hpp
     Simulation.cpp
     Main.cpp
