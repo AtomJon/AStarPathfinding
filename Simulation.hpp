@@ -10,6 +10,7 @@
 
 #include "BaseGridLoader.hpp"
 #include "RandomGridLoader.hpp"
+#include "FileGridLoader.hpp"
 
 #ifndef STARTING_POSITION
 #define STARTING_POSITION {1,4}
@@ -32,7 +33,7 @@ namespace NeutronicPathfinding
         BaseAlgorithm* algorithm = new PheromoneAlgorithm();
         AlgorithmRenderer algoRenderer{algorithm};
 
-        RandomGridLoader* gridLoader = (new RandomGridLoader());
+        BaseGridLoader* gridLoader = new FileGridLoader();
         
         sf::RenderWindow* window;
         

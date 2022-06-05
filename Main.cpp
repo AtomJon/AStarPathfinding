@@ -6,35 +6,42 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode({800, 800}), "A* Pathfinding");
-
-    NeutronicPathfinding::Simulation sim{&window};
-
-    while (window.isOpen())
+    try
     {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
+        sf::RenderWindow window(sf::VideoMode({800, 800}), "A* Pathfinding");
 
-            if (event.type == sf::Event::KeyReleased)
+        NeutronicPathfinding::Simulation sim{&window};
+
+        while (window.isOpen())
+        {
+            sf::Event event;
+            while (window.pollEvent(event))
             {
-                const auto keyCode = event.key.code;
-                switch (keyCode)
-                {
-                case sf::Keyboard::Escape:
+                if (event.type == sf::Event::Closed)
                     window.close();
-                    break;
-                case sf::Keyboard::R:
-                    sim.Regenerate();
-                    break;
-                case sf::Keyboard::Space:
-                    sim.TickAndRender();
-                    break;
+
+                if (event.type == sf::Event::KeyReleased)
+                {
+                    const auto keyCode = event.key.code;
+                    switch (keyCode)
+                    {
+                    case sf::Keyboard::Escape:
+                        window.close();
+                        break;
+                    case sf::Keyboard::R:
+                        sim.Regenerate();
+                        break;
+                    case sf::Keyboard::Space:
+                        sim.TickAndRender();
+                        break;
+                    }
                 }
             }
         }
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
     }
 
     return 0;
