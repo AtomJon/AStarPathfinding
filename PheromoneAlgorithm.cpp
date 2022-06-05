@@ -40,11 +40,6 @@ namespace NeutronicPathfinding
         targetPosition = _targetPosition;
     }
 
-    GridMove PheromoneAlgorithm::GetLastMove()
-    {
-        return moves.back();
-    }
-
     void PheromoneAlgorithm::PerformMove(GridMove move)
     {
         if (lengthOfVector({(float)move.x, (float)move.y}) > 1.)
@@ -56,7 +51,6 @@ namespace NeutronicPathfinding
         positionsAlreadyBeenTo.push_front(position);
 
         position += move;
-        moves.emplace_back(move);
     }
 
     bool PheromoneAlgorithm::PositionIsWall(GridCoords pos)
