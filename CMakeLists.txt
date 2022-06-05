@@ -21,13 +21,14 @@ add_executable(
     BaseAlgorithm.hpp
     PheromoneAlgorithm.hpp
     PheromoneAlgorithm.cpp
+    AlgorithmRenderer.cpp
+    AlgorithmRenderer.hpp
+    BaseGridLoader.hpp
+    RandomGridLoader.hpp
+    RandomGridLoader.cpp
     Simulation.hpp
     Simulation.cpp
     Main.cpp
-    # Algorithm.cpp
-    # Algorithm.hpp
-    AlgorithmRenderer.cpp
-    AlgorithmRenderer.hpp
 )
 
 set(SFML_DIR "${CMAKE_SOURCE_DIR}/lib/${CMAKE_SYSTEM_NAME}/SFML-2.5.1")
