@@ -14,7 +14,8 @@
 using namespace sf;
 
 const int IMPOSSIBLE_MOVE = INT32_MAX;
-const int ATTEMPT_AVOID_MOVE = INT16_MAX;
+const int ATTEMPT_AVOID_MOVE = INT32_MAX - 1;
+const int PREFER_AVOID_MOVE = INT32_MAX - 2;
 
 const GridCoords UP = {0, 1}, DOWN = {0, -1}, LEFT = {-1, 0}, RIGHT = {1, 0};
 
@@ -96,6 +97,7 @@ namespace NeutronicPathfinding
         }
 
         float distance = GetDistanceToTarget(tempPosition);
+        
         return distance;
     }
 
@@ -104,11 +106,13 @@ namespace NeutronicPathfinding
         float rightScore = GetScoreOfMove(RIGHT);
         float upScore = GetScoreOfMove(UP);
         float downScore = GetScoreOfMove(DOWN);
+        float leftScore = GetScoreOfMove(LEFT);
         
         std::cout << ""
             << "Right: " << rightScore
             << "\nUp: " << upScore
             << "\nDown: " << downScore
+            << "\nLeft: " << leftScore
             << std::endl << std::endl;
             
         if ((rightScore == ATTEMPT_AVOID_MOVE || rightScore == IMPOSSIBLE_MOVE) &&
@@ -118,11 +122,11 @@ namespace NeutronicPathfinding
             return LEFT;
         }
         
-        if (rightScore != IMPOSSIBLE_MOVE && rightScore <= upScore && rightScore <= downScore)
+        if (rightScore != IMPOSSIBLE_MOVE && rightScore <= upScore && rightScore <= downScore && rightScore <= leftScore)
             return RIGHT;
-        else if (upScore != IMPOSSIBLE_MOVE && upScore <= rightScore && upScore <= downScore)
+        else if (upScore != IMPOSSIBLE_MOVE && upScore <= rightScore && upScore <= downScore && upScore <= leftScore)
             return UP;
-        else if (downScore != IMPOSSIBLE_MOVE && downScore <= rightScore && downScore <= upScore)
+        else if (downScore != IMPOSSIBLE_MOVE && downScore <= rightScore && downScore <= upScore && downScore <= leftScore)
             return DOWN;
         else
             return LEFT;
