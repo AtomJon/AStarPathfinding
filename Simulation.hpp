@@ -33,7 +33,7 @@ namespace NeutronicPathfinding
         BaseAlgorithm* algorithm = new PheromoneAlgorithm();
         AlgorithmRenderer algoRenderer{algorithm};
 
-        BaseGridLoader* gridLoader = new RandomGridLoader();
+        BaseGridLoader* gridLoader = new FileGridLoader();
         
         sf::RenderWindow* window;
         
