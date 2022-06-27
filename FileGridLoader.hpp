@@ -14,7 +14,7 @@ namespace NeutronicPathfinding
     private:
         Boolean8x8Grid grid;
     public:
-        FileGridLoader() noexcept(false);
+        FileGridLoader(char* fileName) noexcept(false);
         ~FileGridLoader() {}
 
         virtual Boolean8x8Grid GenerateGrid();
