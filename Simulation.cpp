@@ -115,4 +115,9 @@ namespace NeutronicPathfinding
 
         return buffer;
     }
+    
+    bool Simulation::AlgorithmReachedTarget()
+    {
+        return algorithm->ReachedTargetPosition();
+    }
 }

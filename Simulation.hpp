@@ -52,5 +52,7 @@ namespace NeutronicPathfinding
         void Regenerate();
         
         void Initiate();
+        
+        bool AlgorithmReachedTarget();
     };
 }

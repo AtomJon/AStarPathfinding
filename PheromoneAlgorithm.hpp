@@ -39,6 +39,7 @@ namespace NeutronicPathfinding
 
         virtual void Initiate(Boolean8x8Grid *grid, GridCoords position, GridCoords targetPosition);
         virtual void Tick();
+        virtual bool ReachedTargetPosition();
     };
 }
 

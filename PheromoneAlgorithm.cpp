@@ -127,7 +127,7 @@ namespace NeutronicPathfinding
 
     void PheromoneAlgorithm::Tick()
     {
-        if (position == targetPosition)
+        if (ReachedTargetPosition())
         {
             // Reached target position, no need for more moves.
             return;
@@ -136,5 +136,10 @@ namespace NeutronicPathfinding
         auto move = ChooseBestMove();
 
         PerformMove(move);
+    }
+    
+    bool PheromoneAlgorithm::ReachedTargetPosition()
+    {
+        return position == targetPosition;
     }
 }

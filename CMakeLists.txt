@@ -1,5 +1,7 @@
 option(USE_TOOLCHAIN "Use the toolchain file provided for making a crossplatform build. If you are on linux, this will create a windows executable and vise-versa for windows." OFF)
 
+enable_testing()
+
 set(CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_CXX_STANDARD 17)
 
@@ -15,8 +17,10 @@ cmake_minimum_required(VERSION 3.0)
 
 project(PathfindingExe)
 
-add_executable(
-    PathfindingExe
+set(PROJECT_BINARY_DIR "${CMAKE_SOURCE_DIR}/build")
+
+add_library(
+    NeutronicPathfinding
     Utils.cpp
     BaseAlgorithm.hpp
     PheromoneAlgorithm.hpp
@@ -30,6 +34,11 @@ add_executable(
     FileGridLoader.cpp
     Simulation.hpp
     Simulation.cpp
+    
+)
+
+add_executable(
+    PathfindingExe
     Main.cpp
 )
 
@@ -49,4 +58,8 @@ find_package(SFML PATHS "${SFML_DIR}/lib/cmake/SFML" COMPONENTS graphics window 
 
 # file(COPY ${CMAKE_SOURCE_DIR}/SFML/bin DESTINATION bin)
 
-target_link_libraries(PathfindingExe sfml-graphics sfml-window sfml-system)
+set(PROJECT_LIBS NeutronicPathfinding sfml-graphics sfml-window sfml-system)
+
+target_link_libraries(PathfindingExe ${PROJECT_LIBS})
+
+include(${CMAKE_SOURCE_DIR}/test/CMakeLists.txt)
