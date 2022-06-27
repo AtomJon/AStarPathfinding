@@ -4,13 +4,30 @@
 
 #include "Simulation.hpp"
 
+#include "AlgorithmRenderer.hpp"
+#include "PheromoneAlgorithm.hpp"
+
+#include "BaseGridLoader.hpp"
+#include "RandomGridLoader.hpp"
+#include "FileGridLoader.hpp"
+
 int main()
 {
     try
     {
         sf::RenderWindow window(sf::VideoMode({800, 800}), "A* Pathfinding");
+        
+        NeutronicPathfinding::PheromoneAlgorithm algo{};
+        NeutronicPathfinding::AlgorithmRenderer algoRenderer{&algo};
+        
+        NeutronicPathfinding::RandomGridLoader gridLoader{};
 
-        NeutronicPathfinding::Simulation sim{&window};
+        NeutronicPathfinding::Simulation sim{
+            &window,
+            &algo,
+            &algoRenderer,
+            &gridLoader
+            };
 
         while (window.isOpen())
         {

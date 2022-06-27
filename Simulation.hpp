@@ -6,11 +6,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "AlgorithmRenderer.hpp"
-#include "PheromoneAlgorithm.hpp"
 
 #include "BaseGridLoader.hpp"
-#include "RandomGridLoader.hpp"
-#include "FileGridLoader.hpp"
 
 #ifndef STARTING_POSITION
 #define STARTING_POSITION {1,4}
@@ -30,10 +27,10 @@ namespace NeutronicPathfinding
 
         Boolean8x8Grid grid;
         
-        BaseAlgorithm* algorithm = new PheromoneAlgorithm();
-        AlgorithmRenderer algoRenderer{algorithm};
+        BaseAlgorithm* algorithm;
+        AlgorithmRenderer* algorithmRenderer;
 
-        BaseGridLoader* gridLoader = new FileGridLoader();
+        BaseGridLoader* gridLoader;
         
         sf::RenderWindow* window;
         
@@ -47,7 +44,7 @@ namespace NeutronicPathfinding
         void ClearWindow();
         void DisplayWindow();
     public:
-        Simulation(sf::RenderWindow*);
+        Simulation(sf::RenderWindow*, BaseAlgorithm*, AlgorithmRenderer*, BaseGridLoader*);
         ~Simulation() {}
         
         void TickAndRender();
