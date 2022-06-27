@@ -23,7 +23,7 @@ namespace NeutronicPathfinding
 
         ClearWindow();
         RenderGrid();
-        DisplayDrawedToWindow();
+        DisplayWindow();
 
         algorithm->Initiate(&grid, STARTING_POSITION, TARGET_POSITION);
     }
@@ -37,11 +37,11 @@ namespace NeutronicPathfinding
         algorithm->Tick();
         window->draw(algoRenderer);
 
-        DisplayDrawedToWindow();
+        DisplayWindow();
     }
 
     void Simulation::ClearWindow() { window->clear(sf::Color::Black); }
-    void Simulation::DisplayDrawedToWindow() { window->display(); }
+    void Simulation::DisplayWindow() { window->display(); }
 
     void Simulation::RenderGrid()
     {

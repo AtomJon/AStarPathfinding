@@ -33,7 +33,7 @@ namespace NeutronicPathfinding
         BaseAlgorithm* algorithm = new PheromoneAlgorithm();
         AlgorithmRenderer algoRenderer{algorithm};
 
-        BaseGridLoader* gridLoader = new FileGridLoader();
+        BaseGridLoader* gridLoader = new RandomGridLoader();
         
         sf::RenderWindow* window;
         
@@ -45,7 +45,7 @@ namespace NeutronicPathfinding
         sf::VertexBuffer GetVerticesFromIndex(int);
         
         void ClearWindow();
-        void DisplayDrawedToWindow();
+        void DisplayWindow();
     public:
         Simulation(sf::RenderWindow*);
         ~Simulation() {}
