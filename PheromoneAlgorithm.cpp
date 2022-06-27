@@ -13,7 +13,8 @@
 
 using namespace sf;
 
-const int IMPOSSIBLE_MOVE = INFINITY;
+const int IMPOSSIBLE_MOVE = INT32_MAX;
+const int ATTEMPT_AVOID_MOVE = INT16_MAX;
 
 const GridCoords UP = {0, 1}, DOWN = {0, -1}, LEFT = {-1, 0}, RIGHT = {1, 0};
 
@@ -38,6 +39,8 @@ namespace NeutronicPathfinding
         grid = _grid;
         position = _position;
         targetPosition = _targetPosition;
+        
+        positionsAlreadyBeenTo.clear();
     }
 
     void PheromoneAlgorithm::PerformMove(GridMove move)
@@ -80,14 +83,6 @@ namespace NeutronicPathfinding
 
     float PheromoneAlgorithm::GetScoreOfMove(GridMove move)
     {
-        // Avoid current move, if move converses last move
-        // auto lastMove = GetLastMove();
-        // auto intermediateAbs = abs(DistanceBetweenVectors(lastMove, move));
-        // if (intermediateAbs == 2)
-        // {
-        //     return INFINITY;
-        // }
-
         auto tempPosition = position + move;
 
         if (PositionIsWall(tempPosition))
@@ -95,21 +90,34 @@ namespace NeutronicPathfinding
             return IMPOSSIBLE_MOVE; // Move goes into a wall, so discard it.
         }
 
-        // if (HaveAlreadyBeenToPosition(tempPosition))
-        // {
-        //     return INT16_MAX;
-        // }
+        if (HaveAlreadyBeenToPosition(tempPosition))
+        {
+            return ATTEMPT_AVOID_MOVE;
+        }
 
         float distance = GetDistanceToTarget(tempPosition);
         return distance;
     }
 
-    GridCoords PheromoneAlgorithm::ChooseBestMove()
+    GridMove PheromoneAlgorithm::ChooseBestMove()
     {
         float rightScore = GetScoreOfMove(RIGHT);
         float upScore = GetScoreOfMove(UP);
         float downScore = GetScoreOfMove(DOWN);
-
+        
+        std::cout << ""
+            << "Right: " << rightScore
+            << "\nUp: " << upScore
+            << "\nDown: " << downScore
+            << std::endl << std::endl;
+            
+        if ((rightScore == ATTEMPT_AVOID_MOVE || rightScore == IMPOSSIBLE_MOVE) &&
+            (upScore == ATTEMPT_AVOID_MOVE || upScore == IMPOSSIBLE_MOVE) &&
+            (downScore == ATTEMPT_AVOID_MOVE || downScore == IMPOSSIBLE_MOVE))
+        {
+            return LEFT;
+        }
+        
         if (rightScore != IMPOSSIBLE_MOVE && rightScore <= upScore && rightScore <= downScore)
             return RIGHT;
         else if (upScore != IMPOSSIBLE_MOVE && upScore <= rightScore && upScore <= downScore)
