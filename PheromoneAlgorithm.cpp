@@ -107,13 +107,6 @@ namespace NeutronicPathfinding
         float upScore = GetScoreOfMove(UP);
         float downScore = GetScoreOfMove(DOWN);
         float leftScore = GetScoreOfMove(LEFT);
-        
-        std::cout << ""
-            << "Right: " << rightScore
-            << "\nUp: " << upScore
-            << "\nDown: " << downScore
-            << "\nLeft: " << leftScore
-            << std::endl << std::endl;
             
         if ((rightScore == ATTEMPT_AVOID_MOVE || rightScore == IMPOSSIBLE_MOVE) &&
             (upScore == ATTEMPT_AVOID_MOVE || upScore == IMPOSSIBLE_MOVE) &&
