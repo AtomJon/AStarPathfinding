@@ -31,7 +31,7 @@ namespace NeutronicPathfinding
         float GetDistanceToTarget(GridCoords pos);
         float GetScoreOfMove(GridMove move);
 
-        GridCoords ChooseBestMove();
+        GridMove ChooseBestMove();
 
     public:
         PheromoneAlgorithm() {}
