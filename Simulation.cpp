@@ -10,9 +10,14 @@
 
 namespace NeutronicPathfinding
 {
-    Simulation::Simulation(sf::RenderWindow *win)
+    Simulation::Simulation(sf::RenderWindow *win, BaseAlgorithm *algo, AlgorithmRenderer* algoRenderer, BaseGridLoader *loader)
     {
         window = win;
+        
+        algorithm = algo;
+        algorithmRenderer = algoRenderer;
+        
+        gridLoader = loader;
 
         Regenerate();
     }
@@ -35,7 +40,7 @@ namespace NeutronicPathfinding
         RenderGrid();
 
         algorithm->Tick();
-        window->draw(algoRenderer);
+        window->draw(*algorithmRenderer);
 
         DisplayWindow();
     }
