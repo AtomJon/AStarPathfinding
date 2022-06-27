@@ -26,6 +26,7 @@ namespace NeutronicPathfinding
         bool HaveAlreadyBeenToPosition(GridCoords pos);
         void PerformMove(GridMove move);
         bool PositionIsWall(GridCoords pos);
+        bool PositionIsOffGrid(GridCoords pos);
         bool AttemptMove(GridCoords pos);
 
         float GetDistanceToTarget(GridCoords pos);
