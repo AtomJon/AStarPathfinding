@@ -20,7 +20,7 @@ int main()
         NeutronicPathfinding::PheromoneAlgorithm algo{};
         NeutronicPathfinding::AlgorithmRenderer algoRenderer{&algo};
         
-        NeutronicPathfinding::RandomGridLoader gridLoader{};
+        NeutronicPathfinding::FileGridLoader gridLoader{"Grid.csv"};
 
         NeutronicPathfinding::Simulation sim{
             &window,
