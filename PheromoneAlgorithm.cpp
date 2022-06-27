@@ -63,6 +63,14 @@ namespace NeutronicPathfinding
         return (*grid)[index];
     }
 
+    bool PheromoneAlgorithm::PositionIsOffGrid(GridCoords pos)
+    {
+        if (pos.x < 0 || pos.x > 8) return true;
+        if (pos.y < 0 || pos.y > 8) return true;
+        
+        return false;
+    }
+
     float PheromoneAlgorithm::GetDistanceToTarget(GridCoords tempPosition)
     {
         float distanceToTarget = DistanceBetweenVectors<int>(tempPosition, targetPosition);
@@ -86,7 +94,7 @@ namespace NeutronicPathfinding
     {
         auto tempPosition = position + move;
 
-        if (PositionIsWall(tempPosition))
+        if (PositionIsWall(tempPosition) || PositionIsOffGrid(tempPosition))
         {
             return IMPOSSIBLE_MOVE; // Move goes into a wall, so discard it.
         }
@@ -121,8 +129,10 @@ namespace NeutronicPathfinding
             return UP;
         else if (downScore != IMPOSSIBLE_MOVE && downScore <= rightScore && downScore <= upScore && downScore <= leftScore)
             return DOWN;
-        else
+        else if (leftScore != IMPOSSIBLE_MOVE)
             return LEFT;
+        else
+            return {0,0};
     }
 
     void PheromoneAlgorithm::Tick()
