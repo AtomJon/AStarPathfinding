@@ -32,6 +32,8 @@ add_library(
     RandomGridLoader.cpp
     FileGridLoader.hpp
     FileGridLoader.cpp
+    GridRenderer.cpp
+    GridRenderer.hpp
     Simulation.hpp
     Simulation.cpp
     
