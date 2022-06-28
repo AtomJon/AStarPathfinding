@@ -32,12 +32,12 @@ bool RunSimulation()
     bool keepGoing = true;
     while (keepGoing)
     {
-        if (sim.AlgorithmReachedTarget())
+        if (sim.DidAlgorithmReachedTarget())
         {
             keepGoing = false;
         }
 
-        sim.TickAndRender();
+        sim.Tick();
         
         if (!window.isOpen()) keepGoing = false;
     }
