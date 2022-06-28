@@ -24,12 +24,15 @@ int main()
         
         Boolean8x8Grid grid = gridLoader.GenerateGrid();
         
-        NeutronicPathfinding::SimulationRenderer simRenderer{&algo, &grid};
+        NeutronicPathfinding::SimulationRenderer simRenderer{&window, &algo, &grid};
 
         NeutronicPathfinding::Simulation sim{
             &algo,
             &grid
         };
+        
+        sim.Restart();
+        simRenderer.Render();
 
         while (window.isOpen())
         {
@@ -53,6 +56,7 @@ int main()
                         break;
                     case sf::Keyboard::Space:
                         sim.Tick();
+                        simRenderer.Render();
                         break;
                     }
                 }
