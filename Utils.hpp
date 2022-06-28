@@ -11,6 +11,9 @@ typedef std::list<GridCoords> GridPositionsList;
 
 typedef std::array<bool, 64> Boolean8x8Grid;
 
+const sf::Color BROWN{127, 85, 57, 255};
+const sf::Color GRAY{128, 128, 128, 255};
+
 GridCoords GetCoordsFrom8x8GridIndex(int index);
 int Get8x8GridIndexFromCoords(GridCoords coords);
 

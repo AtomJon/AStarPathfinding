@@ -22,37 +22,26 @@ namespace NeutronicPathfinding
     class Simulation
     {
     private:
-        const sf::Color BROWN{127, 85, 57, 255};
-        const sf::Color GRAY{128, 128, 128, 255};
-
         Boolean8x8Grid grid;
         
         BaseAlgorithm* algorithm;
-        AlgorithmRenderer* algorithmRenderer;
 
-        BaseGridLoader* gridLoader;
+        Boolean8x8Grid* grid;
         
         sf::RenderWindow* window;
-        
-        void RenderIndex(int);
-        void RenderGrid();
 
         void RegenerateGrid();
-        
-        sf::VertexBuffer GetVerticesFromIndex(int);
         
         void ClearWindow();
         void DisplayWindow();
     public:
-        Simulation(sf::RenderWindow*, BaseAlgorithm*, AlgorithmRenderer*, BaseGridLoader*);
+        Simulation(BaseAlgorithm*, Boolean8x8Grid*);
         ~Simulation() {}
         
-        void TickAndRender();
+        void Tick();
         
-        void Regenerate();
+        void Restart();
         
-        void Initiate();
-        
-        bool AlgorithmReachedTarget();
+        bool DidAlgorithmReachedTarget();
     };
 }

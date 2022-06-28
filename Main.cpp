@@ -11,6 +11,8 @@
 #include "RandomGridLoader.hpp"
 #include "FileGridLoader.hpp"
 
+#include "SimulationRenderer.hpp"
+
 int main()
 {
     try
@@ -18,16 +20,16 @@ int main()
         sf::RenderWindow window(sf::VideoMode({800, 800}), "A* Pathfinding");
         
         NeutronicPathfinding::PheromoneAlgorithm algo{};
-        NeutronicPathfinding::AlgorithmRenderer algoRenderer{&algo};
-        
         NeutronicPathfinding::FileGridLoader gridLoader{"Grid.csv"};
+        
+        Boolean8x8Grid grid = gridLoader.GenerateGrid();
+        
+        NeutronicPathfinding::SimulationRenderer simRenderer{&algo, &grid};
 
         NeutronicPathfinding::Simulation sim{
-            &window,
             &algo,
-            &algoRenderer,
-            &gridLoader
-            };
+            &grid
+        };
 
         while (window.isOpen())
         {
@@ -46,10 +48,11 @@ int main()
                         window.close();
                         break;
                     case sf::Keyboard::R:
-                        sim.Regenerate();
+                        grid = gridLoader.GenerateGrid();
+                        sim.Restart();
                         break;
                     case sf::Keyboard::Space:
-                        sim.TickAndRender();
+                        sim.Tick();
                         break;
                     }
                 }
