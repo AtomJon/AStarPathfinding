@@ -31,12 +31,12 @@ namespace NeutronicPathfinding
         
         sf::RenderWindow* window;
     public:
-        Simulation(BaseAlgorithm*, Boolean8x8Grid*);
+        Simulation(BaseAlgorithm*);
         ~Simulation() {}
         
         void Tick();
         
-        void Restart();
+        void Restart(Boolean8x8Grid*);
         
         bool DidAlgorithmReachedTarget();
     };

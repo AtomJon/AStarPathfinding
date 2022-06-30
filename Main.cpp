@@ -27,11 +27,10 @@ int main()
         NeutronicPathfinding::SimulationRenderer simRenderer{&window, &algo, &grid};
 
         NeutronicPathfinding::Simulation sim{
-            &algo,
-            &grid
+            &algo
         };
         
-        sim.Restart();
+        sim.Restart(&grid);
         simRenderer.Render();
 
         while (window.isOpen())
@@ -52,7 +51,8 @@ int main()
                         break;
                     case sf::Keyboard::R:
                         grid = gridLoader.GenerateGrid();
-                        sim.Restart();
+                        sim.Restart(&grid);
+                        
                         simRenderer.Render();
                         break;
                     case sf::Keyboard::Space:
