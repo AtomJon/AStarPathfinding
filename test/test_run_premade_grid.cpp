@@ -20,11 +20,12 @@ Boolean8x8Grid grid = gridLoader.GenerateGrid();
 
 NeutronicPathfinding::Simulation sim{
     &algo,
-    &grid
 };
 
 bool RunSimulation()
 {
+    sim.Restart(&grid);
+    
     bool keepGoing = true;
     while (keepGoing)
     {

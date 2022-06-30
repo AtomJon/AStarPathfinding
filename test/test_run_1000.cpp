@@ -20,13 +20,12 @@ Boolean8x8Grid grid = gridLoader.GenerateGrid();
 
 NeutronicPathfinding::Simulation sim{
     &algo,
-    &grid
 };
 
 bool RunSimulation()
 {
     grid = gridLoader.GenerateGrid(); // TODO: Check if this properly updates sim
-    sim.Restart();
+    sim.Restart(&grid);
     
     static std::chrono::high_resolution_clock clock{};
     std::chrono::_V2::system_clock::time_point startedPoint = clock.now();
