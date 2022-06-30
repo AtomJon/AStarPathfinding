@@ -53,6 +53,7 @@ int main()
                     case sf::Keyboard::R:
                         grid = gridLoader.GenerateGrid();
                         sim.Restart();
+                        simRenderer.Render();
                         break;
                     case sf::Keyboard::Space:
                         sim.Tick();
