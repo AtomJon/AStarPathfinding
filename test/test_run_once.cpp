@@ -10,20 +10,15 @@
 #include "../BaseGridLoader.hpp"
 #include "../RandomGridLoader.hpp"
 #include "../FileGridLoader.hpp"
-
-
-sf::RenderWindow window(sf::VideoMode({800, 800}), "A* Pathfinding");
     
 NeutronicPathfinding::PheromoneAlgorithm algo{};
-NeutronicPathfinding::AlgorithmRenderer algoRenderer{&algo};
 
 NeutronicPathfinding::RandomGridLoader gridLoader{};
+Boolean8x8Grid grid = gridLoader.GenerateGrid();
 
 NeutronicPathfinding::Simulation sim{
-    &window,
     &algo,
-    &algoRenderer,
-    &gridLoader
+    &grid
 };
 
 bool RunSimulation()
@@ -37,8 +32,6 @@ bool RunSimulation()
         }
             
         sim.Tick();
-        
-        if (!window.isOpen()) keepGoing = false;
     }
     
     return true;

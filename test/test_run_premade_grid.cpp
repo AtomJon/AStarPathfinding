@@ -12,19 +12,15 @@
 #include "../FileGridLoader.hpp"
 
 #define GRID_FILE_NAME std::string("Grid.csv")
-
-sf::RenderWindow window(sf::VideoMode({800, 800}), "A* Pathfinding");
     
 NeutronicPathfinding::PheromoneAlgorithm algo{};
-NeutronicPathfinding::AlgorithmRenderer algoRenderer{&algo};
 
 NeutronicPathfinding::FileGridLoader gridLoader{(char *)GRID_FILE_NAME.c_str()};
+Boolean8x8Grid grid = gridLoader.GenerateGrid();
 
 NeutronicPathfinding::Simulation sim{
-    &window,
     &algo,
-    &algoRenderer,
-    &gridLoader
+    &grid
 };
 
 bool RunSimulation()
@@ -38,8 +34,6 @@ bool RunSimulation()
         }
 
         sim.Tick();
-        
-        if (!window.isOpen()) keepGoing = false;
     }
     
     return true;

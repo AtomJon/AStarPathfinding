@@ -12,25 +12,21 @@
 #include "../BaseGridLoader.hpp"
 #include "../RandomGridLoader.hpp"
 #include "../FileGridLoader.hpp"
-
-
-sf::RenderWindow window(sf::VideoMode({800, 800}), "A* Pathfinding");
     
 NeutronicPathfinding::PheromoneAlgorithm algo{};
-NeutronicPathfinding::AlgorithmRenderer algoRenderer{&algo};
-
 NeutronicPathfinding::RandomGridLoader gridLoader{};
 
+Boolean8x8Grid grid = gridLoader.GenerateGrid();
+
 NeutronicPathfinding::Simulation sim{
-    &window,
     &algo,
-    &algoRenderer,
-    &gridLoader
+    &grid
 };
 
 bool RunSimulation()
 {
-    sim.Regenerate();
+    grid = gridLoader.GenerateGrid(); // TODO: Check if this properly updates sim
+    sim.Restart();
     
     static std::chrono::high_resolution_clock clock{};
     std::chrono::_V2::system_clock::time_point startedPoint = clock.now();
@@ -49,8 +45,6 @@ bool RunSimulation()
         }
 
         sim.Tick();
-        
-        if (!window.isOpen()) keepGoing = false;
     }
     
     return true;
