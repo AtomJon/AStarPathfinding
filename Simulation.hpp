@@ -1,3 +1,6 @@
+#ifndef SIMULATION_H
+#define SIMULATION_H
+
 #include <iostream>
 #include <math.h>
 #include <cmath>
@@ -21,38 +24,22 @@ namespace NeutronicPathfinding
 {
     class Simulation
     {
-    private:
-        const sf::Color BROWN{127, 85, 57, 255};
-        const sf::Color GRAY{128, 128, 128, 255};
-
-        Boolean8x8Grid grid;
-        
+    private:        
         BaseAlgorithm* algorithm;
-        AlgorithmRenderer* algorithmRenderer;
 
-        BaseGridLoader* gridLoader;
+        Boolean8x8Grid* grid;
         
         sf::RenderWindow* window;
-        
-        void RenderIndex(int);
-        void RenderGrid();
-
-        void RegenerateGrid();
-        
-        sf::VertexBuffer GetVerticesFromIndex(int);
-        
-        void ClearWindow();
-        void DisplayWindow();
     public:
-        Simulation(sf::RenderWindow*, BaseAlgorithm*, AlgorithmRenderer*, BaseGridLoader*);
+        Simulation(BaseAlgorithm*);
         ~Simulation() {}
         
-        void TickAndRender();
+        void Tick();
         
-        void Regenerate();
+        void Restart(Boolean8x8Grid*);
         
-        void Initiate();
-        
-        bool AlgorithmReachedTarget();
+        bool DidAlgorithmReachedTarget();
     };
 }
+
+#endif

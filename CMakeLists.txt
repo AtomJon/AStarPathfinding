@@ -32,9 +32,12 @@ add_library(
     RandomGridLoader.cpp
     FileGridLoader.hpp
     FileGridLoader.cpp
+    GridRenderer.cpp
+    GridRenderer.hpp
+    SimulationRenderer.cpp
+    SimulationRenderer.hpp
     Simulation.hpp
     Simulation.cpp
-    
 )
 
 add_executable(
