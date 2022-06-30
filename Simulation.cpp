@@ -10,10 +10,10 @@
 
 namespace NeutronicPathfinding
 {
-    Simulation::Simulation(BaseAlgorithm *algo, Boolean8x8Grid *grid)
+    Simulation::Simulation(BaseAlgorithm *algo, Boolean8x8Grid *_grid)
     {        
         algorithm = algo;
-        grid = grid;
+        grid = _grid;
     }
 
     void Simulation::Tick()
