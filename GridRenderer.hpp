@@ -1,3 +1,6 @@
+#ifndef GRID_RENDER_H
+#define GRID_RENDER_H
+
 #include "Utils.hpp"
 
 #include <SFML/Window.hpp>
@@ -22,3 +25,5 @@ namespace NeutronicPathfinding
     };
     
 }
+
+#endif

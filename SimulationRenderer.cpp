@@ -10,11 +10,10 @@
 
 namespace NeutronicPathfinding
 {
-    SimulationRenderer::SimulationRenderer(RenderWindow* window, BaseAlgorithm *algo, Boolean8x8Grid *grid)
+    SimulationRenderer::SimulationRenderer(RenderWindow* window, BaseAlgorithm *algo, Boolean8x8Grid *grid):
+    algoRenderer(algo),
+    gridRenderer(grid)
     {
-        algoRenderer = AlgorithmRenderer{algo};
-        gridRenderer = GridRenderer{grid};
-        
         window = window;
     }
 

@@ -1,3 +1,6 @@
+#ifndef SIMULATION_H
+#define SIMULATION_H
+
 #include <iostream>
 #include <math.h>
 #include <cmath>
@@ -21,9 +24,7 @@ namespace NeutronicPathfinding
 {
     class Simulation
     {
-    private:
-        Boolean8x8Grid grid;
-        
+    private:        
         BaseAlgorithm* algorithm;
 
         Boolean8x8Grid* grid;
@@ -45,3 +46,5 @@ namespace NeutronicPathfinding
         bool DidAlgorithmReachedTarget();
     };
 }
+
+#endif

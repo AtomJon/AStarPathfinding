@@ -30,7 +30,7 @@ namespace NeutronicPathfinding
 
     void GridRenderer::RenderIndex(int index)
     {
-        bool isWall = grid[index];
+        bool isWall = grid->at(index);
 
         if (isWall == true)
         {
