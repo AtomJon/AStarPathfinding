@@ -30,11 +30,6 @@ namespace NeutronicPathfinding
         Boolean8x8Grid* grid;
         
         sf::RenderWindow* window;
-
-        void RegenerateGrid();
-        
-        void ClearWindow();
-        void DisplayWindow();
     public:
         Simulation(BaseAlgorithm*, Boolean8x8Grid*);
         ~Simulation() {}
