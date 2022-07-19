@@ -8,9 +8,9 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "AlgorithmRenderer.hpp"
+#include "GridTypes.hpp"
 
-#include "BaseGridLoader.hpp"
+#include "BaseAlgorithm.hpp"
 
 #ifndef STARTING_POSITION
 #define STARTING_POSITION {1,4}

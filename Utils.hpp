@@ -1,15 +1,6 @@
-#include <list>
-#include <array>
-
 #include <SFML/Graphics.hpp>
 
-typedef sf::Vector2i GridCoords;
-typedef sf::Vector2i GridMove;
-
-typedef std::list<GridMove> MovesList;
-typedef std::list<GridCoords> GridPositionsList;
-
-typedef std::array<bool, 64> Boolean8x8Grid;
+#include "GridTypes.hpp"
 
 #define BROWN sf::Color{127, 85, 57, 255};
 #define GRAY sf::Color{128, 128, 128, 255};

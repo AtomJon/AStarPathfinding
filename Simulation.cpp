@@ -5,7 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "AlgorithmRenderer.hpp"
+#include "GridTypes.hpp"
 #include "PheromoneAlgorithm.hpp"
 
 namespace NeutronicPathfinding
