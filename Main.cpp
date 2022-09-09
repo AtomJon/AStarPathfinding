@@ -15,58 +15,51 @@
 
 int main()
 {
-    try
+    sf::RenderWindow window(sf::VideoMode({800, 800}), "A* Pathfinding");
+    
+    NeutronicPathfinding::PheromoneAlgorithm algo{};
+    NeutronicPathfinding::FileGridLoader gridLoader{"Grid.csv"};
+    
+    Boolean8x8Grid grid = gridLoader.GenerateGrid();
+    
+    NeutronicPathfinding::SimulationRenderer simRenderer{&window, &algo, &grid};
+
+    NeutronicPathfinding::Simulation sim{
+        &algo
+    };
+    
+    sim.Restart(&grid);
+    simRenderer.Render();
+
+    while (window.isOpen())
     {
-        sf::RenderWindow window(sf::VideoMode({800, 800}), "A* Pathfinding");
-        
-        NeutronicPathfinding::PheromoneAlgorithm algo{};
-        NeutronicPathfinding::FileGridLoader gridLoader{"Grid.csv"};
-        
-        Boolean8x8Grid grid = gridLoader.GenerateGrid();
-        
-        NeutronicPathfinding::SimulationRenderer simRenderer{&window, &algo, &grid};
-
-        NeutronicPathfinding::Simulation sim{
-            &algo
-        };
-        
-        sim.Restart(&grid);
-        simRenderer.Render();
-
-        while (window.isOpen())
+        sf::Event event;
+        while (window.pollEvent(event))
         {
-            sf::Event event;
-            while (window.pollEvent(event))
-            {
-                if (event.type == sf::Event::Closed)
-                    window.close();
+            if (event.type == sf::Event::Closed)
+                window.close();
 
-                if (event.type == sf::Event::KeyReleased)
+            if (event.type == sf::Event::KeyReleased)
+            {
+                const auto keyCode = event.key.code;
+                switch (keyCode)
                 {
-                    const auto keyCode = event.key.code;
-                    switch (keyCode)
-                    {
-                    case sf::Keyboard::Escape:
-                        window.close();
-                        break;
-                    case sf::Keyboard::R:
-                        grid = gridLoader.GenerateGrid();
-                        sim.Restart(&grid);
-                        
-                        simRenderer.Render();
-                        break;
-                    case sf::Keyboard::Space:
-                        sim.Tick();
-                        simRenderer.Render();
-                        break;
-                    }
+                case sf::Keyboard::Escape:
+                    window.close();
+                    break;
+                case sf::Keyboard::R:
+                    grid = gridLoader.GenerateGrid();
+                    sim.Restart(&grid);
+                    
+                    simRenderer.Render();
+                    break;
+                case sf::Keyboard::Space:
+                    sim.Tick();
+                    simRenderer.Render();
+                    break;
                 }
             }
         }
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
     }
 
     return 0;
