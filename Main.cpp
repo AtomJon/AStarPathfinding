@@ -18,7 +18,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode({800, 800}), "A* Pathfinding");
     
     NeutronicPathfinding::PheromoneAlgorithm algo{};
-    NeutronicPathfinding::FileGridLoader gridLoader{"Grid.csv"};
+    NeutronicPathfinding::RandomGridLoader gridLoader{};
     
     Boolean8x8Grid grid = gridLoader.GenerateGrid();
     
