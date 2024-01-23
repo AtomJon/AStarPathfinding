@@ -1,5 +1,3 @@
-option(USE_TOOLCHAIN "Use the toolchain file provided for making a crossplatform build. If you are on linux, this will create a windows executable and vise-versa for windows." OFF)
-
 enable_testing()
 
 set(CXX_STANDARD_REQUIRED TRUE)
@@ -13,56 +11,41 @@ if(USE_TOOLCHAIN)
     endif()
 endif()
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 
 project(PathfindingExe)
 
 set(PROJECT_BINARY_DIR "${CMAKE_SOURCE_DIR}/build")
 
-add_library(
-    NeutronicPathfinding
-    Utils.cpp
-    BaseAlgorithm.hpp
-    PheromoneAlgorithm.hpp
-    PheromoneAlgorithm.cpp
-    AlgorithmRenderer.cpp
-    AlgorithmRenderer.hpp
-    BaseGridLoader.hpp
-    RandomGridLoader.hpp
-    RandomGridLoader.cpp
-    FileGridLoader.hpp
-    FileGridLoader.cpp
-    GridRenderer.cpp
-    GridRenderer.hpp
-    SimulationRenderer.cpp
-    SimulationRenderer.hpp
-    Simulation.hpp
-    Simulation.cpp
-)
-
 add_executable(
     PathfindingExe
-    Main.cpp
+    src/Main.cpp
+    src/Utils.cpp
+    src/BaseAlgorithm.hpp
+    src/PheromoneAlgorithm.hpp
+    src/PheromoneAlgorithm.cpp
+    src/AlgorithmRenderer.cpp
+    src/AlgorithmRenderer.hpp
+    src/BaseGridLoader.hpp
+    src/RandomGridLoader.hpp
+    src/RandomGridLoader.cpp
+    src/FileGridLoader.hpp
+    src/FileGridLoader.cpp
+    src/GridRenderer.cpp
+    src/GridRenderer.hpp
+    src/SimulationRenderer.cpp
+    src/SimulationRenderer.hpp
+    src/Simulation.hpp
+    src/Simulation.cpp
 )
 
-set(SFML_DIR "${CMAKE_SOURCE_DIR}/lib/${CMAKE_SYSTEM_NAME}/SFML-2.5.1")
-# set(SFML_STATIC_LIBRARIES TRUE)
 
-include_directories("${SFML_DIR}/include")
-find_package(SFML PATHS "${SFML_DIR}/lib/cmake/SFML" COMPONENTS graphics window system REQUIRED)
+find_package(SFML COMPONENTS graphics window system REQUIRED)
 
-# if(NOT SFML_STATIC_LIBRARIES)
-    # add_custom_target(copy)
-    # add_custom_command(
-    #     TARGET PathfindingExe POST_BUILD
-    #     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/SFML/bin $<TARGET_FILE_DIR:PathfindingExe>
-    # )
-# endif()
+include_directories(${SFML_INCLUDE_DIRS})
 
-# file(COPY ${CMAKE_SOURCE_DIR}/SFML/bin DESTINATION bin)
+target_link_libraries(PathfindingExe sfml::sfml)
 
-set(PROJECT_LIBS NeutronicPathfinding sfml-graphics sfml-window sfml-system)
+# include(${CMAKE_SOURCE_DIR}/test/CMakeLists.txt)
 
-target_link_libraries(PathfindingExe ${PROJECT_LIBS})
-
-include(${CMAKE_SOURCE_DIR}/test/CMakeLists.txt)
+# "C:\Program Files\CMake\bin\cmake.EXE" -DCMAKE_POLICY_DEFAULT_CMP0091=NEW -DCMAKE_TOOLCHAIN_FILE=F:/MyPrograms/C++/test_crosscompile/AStarPathfinding/build/conan_toolchain.cmake -SF:/MyPrograms/C++/test_crosscompile/AStarPathfinding -BF:/MyPrograms/C++/test_crosscompile/AStarPathfinding/build -G "Visual Studio 17 2022" -T v143 -A x64

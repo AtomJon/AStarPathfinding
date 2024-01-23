@@ -1,0 +1,9 @@
+{
+    "version": 4,
+    "vendor": {
+        "conan": {}
+    },
+    "include": [
+        "F:\\MyPrograms\\C++\\test_crosscompile\\AStarPathfinding\\build\\CMakePresets.json"
+    ]
+}
