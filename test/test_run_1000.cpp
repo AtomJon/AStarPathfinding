@@ -28,7 +28,7 @@ bool RunSimulation()
     sim.Restart(&grid);
     
     static std::chrono::high_resolution_clock clock{};
-    std::chrono::_V2::system_clock::time_point startedPoint = clock.now();
+    std::chrono::steady_clock::time_point startedPoint = clock.now();
     
     bool keepGoing = true;
     while (keepGoing)
