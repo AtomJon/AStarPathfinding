@@ -16,6 +16,8 @@ const sf::Color characterColor = sf::Color::White;
 const sf::Vector2f pathMarkerSize{50., 20.};
 const sf::Color pathMarkerColor = sf::Color::Blue;
 
+// TODO: Either display the path or remove the redundant constants.
+
 sf::RectangleShape CreateRectangleFromGridPosAndSize(GridCoords gridPos, sf::Vector2f size, sf::Color color)
 {
     float offsetX = (sizeOfTileOnScreen - size.x) / 2.;
