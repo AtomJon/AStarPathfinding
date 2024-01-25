@@ -3,13 +3,10 @@ enable_testing()
 set(CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_CXX_STANDARD 17)
 
-if(USE_TOOLCHAIN)
-    if ( CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" )
-        set(CMAKE_TOOLCHAIN_FILE  "${CMAKE_SOURCE_DIR}/cmake/Toolchain-windows.cmake")
-    elseif( CMAKE_HOST_SYSTEM_NAME MATCHES "Windows" )
-        set(CMAKE_TOOLCHAIN_FILE  "${CMAKE_SOURCE_DIR}/cmake/Toolchain-linux.cmake")
-    endif()
-endif()
+message("${CMAKE_SOURCE_DIR}/build/conan_toolchain.cmake")
+
+set(CMAKE_TOOLCHAIN_FILE  "${CMAKE_SOURCE_DIR}/build/conan_toolchain.cmake")
+set(CMAKE_POLICY_DEFAULT_CMP0091 "NEW")
 
 cmake_minimum_required(VERSION 3.5)
 

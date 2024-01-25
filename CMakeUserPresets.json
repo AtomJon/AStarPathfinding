@@ -4,6 +4,7 @@
         "conan": {}
     },
     "include": [
-        "F:\\MyPrograms\\C++\\test_crosscompile\\AStarPathfinding\\build\\CMakePresets.json"
+        "F:\\MyPrograms\\C++\\test_crosscompile\\AStarPathfinding\\build\\CMakePresets.json",
+        "F:\\MyPrograms\\C++\\AStarPathfinding\\build\\CMakePresets.json"
     ]
 }
